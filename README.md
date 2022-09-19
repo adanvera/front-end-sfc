@@ -5,7 +5,7 @@ Examen primer parcial electiva III -->
 ## Development team
 
 El diseño y desarrollo del proyecto estan a cargo del equipo,
-compuesto por [Juan Marcelo Barrios](https://www.linkedin.com/in/juan-marcelo-barrios-rivas-b5aa29186/), junto con [Miguel Villamayor](https://www.linkedin.com/in/miguel-villamayor-547225181/) y [Adan Vera](https://www.linkedin.com/in/veraadan/) 
+compuesto por [Juan Marcelo Barrios](https://www.linkedin.com/in/juan-marcelo-barrios-rivas-b5aa29186/), junto con [Miguel Villamayor](https://www.linkedin.com/in/miguel-villamayor-547225181/) y [Adan Vera](https://www.linkedin.com/in/adanvera/) 
 
 <table>
   <tr>
