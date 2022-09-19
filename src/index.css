@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/*Login section */
+
+section#main-login {
+  display: flex;
+}
+
+
+#mid-login-one {
+  background: url(http://drive.google.com/uc?export=view&id=1x9QsaWmwFAA3PYqB6Lw_2aAzc4_dTliu);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* filter: blur(3px); */
+}
