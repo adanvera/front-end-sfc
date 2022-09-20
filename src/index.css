@@ -16,3 +16,6 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light {
   background: linear-gradient(145.64deg, #00E0FF 9.67%, #0047FF 107.49%);
 }
 
+a.nav-link {
+  color: white;
+}
