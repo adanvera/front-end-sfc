@@ -1,53 +1,53 @@
+import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Cliente from '../../Models/Usuario';
+import TableBody from './TableBody';
+
+//Datos solo para pruebas
+const cliente1 = new Cliente('Juan', 'Barrios', '543545', 'CI', 'P', 'marcelo@asf.com', '098776', '24/06/1999')
+const cliente2 = new Cliente('Marcelo', 'Rivas', '32412341', 'CI', 'P', 'marcelo@afasdadfs.com', '098776', '24/06/1999')
 
 function DatosCliente() {
-    
-    return (
+  const [isClientEmpty, setIsClientEmpty] = useState(true);
+  const [clientes, setClientes] = useState([cliente1,cliente2]);
+  
+ 
+  
+
+  return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
           <th>Nombre</th>
           <th>Apellido</th>
-          <th>numero_documento</th>
-          <th>tipo_documento</th>
-          <th>nacionalidad</th>
-          <th>email</th>
-          <th>telefono</th>
-          <th>fecha_nacimiento</th>
+          <th>Numero documento</th>
+          <th>Tipo documento</th>
+          <th>Nacionalidad</th>
+          <th>Email</th>
+          <th>Telefono</th>
+          <th>Fecha nacimiento</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
+        {isClientEmpty ? (
+          clientes.map((cliente,i) => {
+            
+            return  (<TableBody cliente = {cliente} />)
+
+          
+          })
+
+
+        ) : (
+          <>
+            NO hay clientes
+          </>
+        )
+
+        }
+
       </tbody>
     </Table>
   );
