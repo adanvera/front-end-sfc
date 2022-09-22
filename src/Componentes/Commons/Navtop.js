@@ -2,19 +2,21 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 import DatosCliente from '../AdministracionDatosCliente/DatosCliente';
 
 function Navtop() {
     return (
         <Navbar bg="light" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home">Sistema de fidelización</Navbar.Brand>
+            <Container fluid={true} >
+                <Navbar.Brand><Link to="/dashboard">Sistema de fidelización</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#Clientes">Clientes</Nav.Link>
-                        <Nav.Link href="#puntos">Administración puntos</Nav.Link>
-                        <Nav.Link href="#premios">Administración premios</Nav.Link>
+                        <Link to="/clientes">Clientes</Link>
+                        <Link to="/puntos">Puntos</Link>
+                        <Link to="/reglas">Reglas</Link>
+                        <Link to="/canjes">Canjes</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

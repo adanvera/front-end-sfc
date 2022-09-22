@@ -19,3 +19,69 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light {
 a.nav-link {
   color: white;
 }
+
+.welcome {
+  height: 100vh;
+  text-align: center;
+  justify-content: center;
+  position: relative;
+}
+
+.content-wlc{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light a {
+  color: white;
+  text-decoration: none;
+  padding-left: 25px;
+}
+
+
+button.btn-buscar{
+  background: linear-gradient(145.64deg, #00E0FF 9.67%, #0047FF 107.49%);  color: white;
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 120px;
+  border: none;
+}
+
+input.input.is-normal.searchinput {
+  height: 40px;
+  margin-right: 15px;
+  border-radius: 5px;
+  border: 1px solid #E5E7EB;
+  width: 300px;
+}
+
+.is-inline-flex a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+}
+
+tr.table-header {
+  background: rgb(220, 220, 220);
+  color: white !important;
+}
+
+button.button.btn-add.ml-2 {
+  /* height: 100%; */
+  width: 230px;
+  height: 40px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(145.64deg, #00E0FF 9.67%, #0047FF 107.49%);  color: white;
+}
+
+.ordercol.col {
+  text-align: -webkit-right;
+}
+
+div#create {
+  text-align: end;
+}
