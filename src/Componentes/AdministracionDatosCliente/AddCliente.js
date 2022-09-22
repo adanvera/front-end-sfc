@@ -4,15 +4,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const AddClient = props => {
-
     const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
+        console.log(form);
+        
         setValidated(true);
     };
 
@@ -73,7 +75,7 @@ const AddClient = props => {
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="validationCustom04">
                             <Form.Label>Número de telefono</Form.Label>
-                            <Form.Control type="email" placeholder="Numero de telefono" required />
+                            <Form.Control type="number" placeholder="Numero de telefono" required />
                             <Form.Control.Feedback type="invalid">Escribir numero de telefono</Form.Control.Feedback>
                         </Form.Group>
                     </Row>

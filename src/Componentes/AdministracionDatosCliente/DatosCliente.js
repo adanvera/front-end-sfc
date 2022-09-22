@@ -105,7 +105,7 @@ function DatosCliente() {
           </div>
         </Col>
       </Row>
-      <AddClient title={state?.title} show={modalShow} onHide={() => setModalShow(false)} />
+      <AddClient title={state?.title} clientes ={dataClient} show={modalShow} onHide={() => setModalShow(false)} />
       <Table headers={state.headers} data={formatedData} />
     </Container>
   )
