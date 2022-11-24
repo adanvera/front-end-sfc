@@ -23,24 +23,3 @@ compuesto por [Juan Marcelo Barrios](https://www.linkedin.com/in/juan-marcelo-ba
 </table>
 
 
-##Guia de instalación del proyecto
-Proyecto correspondiente al backend del sistema de fidelización de clientes
-
-#Paso 1
-    -   Clonar proyecto
-
-#Paso 2
-    -  Instalar dependencias con el comando:
-    
-    npm install
-
-#Paso 3
-    -   Una vez realizada el paso anterior y este finalizada, ejecutamos la siguiente linea
-    de comando:
-    
-    node app.js
-
-#Paso 4
-    -   Una vez desplegada proceder a testar las apis con Postman o con algun otro
-    programa de su preferencia.
-    Las apis correspondientes se encuentran disponible en la configuracion del server

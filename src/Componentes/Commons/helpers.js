@@ -24,8 +24,8 @@ export const formatedDataCliente = (data) => {
         data.forEach(item => {
             obData = {
                 ...obData,
-                [item.id]: {
-                    id: item.id,
+                [item.uid]: {
+                    id: item.uid,
                     nombre: item.nombre,
                     apellido: item.apellido,
                     tipoDocumento: item.tipoDocumento,

@@ -30,9 +30,9 @@ function DatosCliente() {
   }
 
   const [state, setState] = useState(initialState)
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [isClientEmpty, setIsClientEmpty] = useState(true);
-  const [client,setClient] = useState('')
+  const [client, setClient] = useState('')
 
 
   /* const dataClient = [
@@ -85,21 +85,19 @@ function DatosCliente() {
 
   const [modalShow, setModalShow] = useState(false);
 
-  useEffect(()=>{
-    const getClient = async ()=>{
+  useEffect(() => {
+    const getClient = async () => {
       const req = await fetch(CLIENT_DEV),
-      res = await req.json()
-      
-      if(!req.ok)return
-      console.log(res);
-      setClient(res)
+        res = await req.json()
+
+      if (!req.ok) return
+      setClient(res?.clients)
       setLoading(false)
     }
     getClient()
-  },[])
+  }, [])
+
   const formatedData = formatedDataCliente(client)
-  console.log('Vemos el formData');
-  console.log(formatedData);
 
   return (
     <Container fluid={true} className="main-content">
@@ -119,9 +117,9 @@ function DatosCliente() {
           </div>
         </Col>
       </Row>
-      <AddClient title={state?.title} clientes ={client} show={modalShow} onHide={() => setModalShow(false)} />
-      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} />) }
-      
+      <AddClient title={state?.title} clientes={client} show={modalShow} onHide={() => setModalShow(false)} />
+      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} />)}
+
     </Container>
   )
 }
