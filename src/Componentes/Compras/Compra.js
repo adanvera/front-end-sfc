@@ -141,6 +141,7 @@ function Compra() {
                 redirectPage()
             } catch (error) {
                 console.log(error)
+                toast.error("Ocurrio un error al hacer la compra")
             }
 
         }
@@ -180,7 +181,7 @@ function Compra() {
                                         label="Nombre y Apellido"
                                         className="mb-3 w-100"
                                     >
-                                        <Form.Control type="text" placeholder="" value={clientToShow?.nombre} disabled />
+                                        <Form.Control type="text" placeholder="" value={clientToShow?.nombre + " " + clientToShow?.apellido} disabled />
                                     </FloatingLabel>
                                 </Col>
                                 <Col md={4} className='mt-3'>

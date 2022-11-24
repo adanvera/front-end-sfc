@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import toast from 'react-hot-toast';
 import { CLIENT_DEV } from '../Commons/Endpoint';
 
 const AddClient = props => {
@@ -43,8 +44,10 @@ const AddClient = props => {
             res = await req.json()
             console.log('Insertamos el cliente');
             console.log(res);     
+            toast.success('Cliente creado existosamente')
         } catch (error) {
             console.log(error);
+            toast.success('Ocurio un error al crear el cliente')
         }
         
 

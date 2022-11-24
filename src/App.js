@@ -25,6 +25,7 @@ function App() {
             <Route exact path="/puntos" element={<Puntos />} />
             <Route exact path="/reglas" element={<Reglas />} />
             <Route exact path="/canjes" element={<Canjes />} />
+            <Route exact path="/compras" element={<Compra />} />
           </Route>
         </Routes>
       </BrowserRouter>
