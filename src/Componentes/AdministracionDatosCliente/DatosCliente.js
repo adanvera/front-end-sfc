@@ -97,7 +97,9 @@ function DatosCliente() {
     }
     getClient()
   },[])
-  const formatedData = formatedDataCliente([client])
+  const formatedData = formatedDataCliente(client)
+  console.log('Vemos el formData');
+  console.log(formatedData);
 
   return (
     <Container fluid={true} className="main-content">

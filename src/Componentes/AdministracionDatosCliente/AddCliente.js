@@ -7,16 +7,16 @@ import { CLIENT_DEV } from '../Commons/Endpoint';
 const AddClient = props => {
     const [validated, setValidated] = useState(false);
     const client =  {
-    nombre: "Juan",
-    apellido: "Barrios",
-    documento: "4556443",
-    tipoDocumento: "cedula",
-    nacionalidad: "PARAGUAYA",
-    correo: "marcelo@asf.com",
-    telefono: "0987778895",
+    nombre: "",
+    apellido: "",
+    documento: "",
+    tipoDocumento: "",
+    nacionalidad: "",
+    correo: "",
+    telefono: "",
     
   }
-
+//Agregamos clientes
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(event);
@@ -27,8 +27,9 @@ const AddClient = props => {
         }
         setValidated(true);
         client[event.target.name] = event.target.value
+        console.log(client);
         
-        const req = await fetch(CLIENT_DEV,{
+        /* const req = await fetch(CLIENT_DEV,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +39,7 @@ const AddClient = props => {
         }),
         res = await req.json()
         console.log('Insertamos el cliente');
-        console.log(res);
+        console.log(res); */
 
         
         
