@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Toaster } from 'react-hot-toast';
 import Cliente from '../../Models/Usuario';
 import { CLIENT_DEV } from '../Commons/Endpoint';
 import { formatedDataCliente } from '../Commons/helpers';
@@ -13,7 +14,7 @@ function DatosCliente() {
 
   const initialState = {
     headers: {
-      
+
       "nombre": "Nombre",
       "apellido": "Apellido",
       "tipoDocumento": "Tipo de documento",
@@ -21,7 +22,7 @@ function DatosCliente() {
       "nacionalidad": "Nacionalidad",
       "correo": "Correo",
       "telefono": "Teléfono",
-      
+
       "actions": "Acciones"
     },
     title: 'Agregar cliente'
@@ -30,7 +31,7 @@ function DatosCliente() {
   const [state, setState] = useState(initialState)
   const [loading, setLoading] = useState(true)
   const [client, setClient] = useState('')
-  const [editModal,setEditModal] = useState(false) 
+  const [editModal, setEditModal] = useState(false)
   const formatedData = formatedDataCliente(client)
   const [modalShow, setModalShow] = useState(false);
 
@@ -61,6 +62,10 @@ function DatosCliente() {
 
   return (
     <Container fluid={true} className="main-content">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
       <div className="mt-4">
         <h5>Lista de clientes</h5>
       </div>
@@ -79,7 +84,7 @@ function DatosCliente() {
       </Row>
       <AddClient title={state?.title} clientes={client} show={modalShow} onHide={() => setModalShow(false)} />
       <EditCliente title={'Editar'} clientes={client} show={editModal} onHide={() => setEditModal(false)} />
-      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} btnEdit = {setEditModal} />)}
+      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} btnEdit={setEditModal} />)}
 
     </Container>
   )
