@@ -1,7 +1,7 @@
 import React from 'react'
 import { CLIENT_DEV } from '../Commons/Endpoint';
 
-function ClientesActions({id}) {
+function ClientesActions(props) {
     
     const handleDelete = async (e) =>{
         const id = e.target.value;
@@ -25,12 +25,13 @@ function ClientesActions({id}) {
 
     }
     const handleEdit =  async (e) =>{
+        props.btnEdit(true)
         console.log('Editando');
         console.log(e.target.value);
     }
     return (
         <div className="actions">
-            <button className='btn btn-danger btn-sm' value={id} onClick={(e) => handleDelete(e)} >Eliminar</button><button className='btn btn-primary btn-sm m-1'>Editar</button>
+            <button className='btn btn-danger btn-sm' value={props.id} onClick={(e) => handleDelete(e)}  >Eliminar</button><button className='btn btn-primary btn-sm m-1' value={props.id} onClick={(e) => handleEdit(e)} >Editar</button>
         </div>
     )
 }

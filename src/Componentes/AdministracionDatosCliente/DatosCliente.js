@@ -6,10 +6,8 @@ import { formatedDataCliente } from '../Commons/helpers';
 import SearchTable from '../Commons/SearchTable';
 import Table from '../Commons/Tables/Table';
 import AddClient from './AddCliente';
+import EditCliente from './EditCliente';
 
-//Datos solo para pruebas
-const cliente1 = new Cliente('Juan', 'Barrios', '543545', 'CI', 'P', 'marcelo@asf.com', '098776', '24/06/1999')
-const cliente2 = new Cliente('Marcelo', 'Rivas', '32412341', 'CI', 'P', 'marcelo@afasdadfs.com', '098776', '24/06/1999')
 
 function DatosCliente() {
 
@@ -31,46 +29,10 @@ function DatosCliente() {
 
   const [state, setState] = useState(initialState)
   const [loading, setLoading] = useState(true)
-  const [isClientEmpty, setIsClientEmpty] = useState(true);
   const [client, setClient] = useState('')
-
-
-  /* const dataClient = [
-    {
-      "id": "1",
-      "nombre": "Juan",
-      "apellido": "Barrios",
-      "documento": "4556443",
-      "tipodoc": "cedula",
-      "nacionalidad": "PARAGUAYA",
-      "correo": "marcelo@asf.com",
-      "telefono": "0987778895",
-      "fechanacimiento": "24/06/1999",
-    },
-    {
-      "id": "2",
-      "nombre": "Miguel",
-      "apellido": "Villamayor",
-      "documento": "4558996",
-      "tipodoc": "cedula",
-      "nacionalidad": "PARAGUAYA",
-      "correo": "miguel@asf.com",
-      "telefono": "0987778895",
-      "fechanacimiento": "24/06/1997",
-    },
-    {
-      "id": "3",
-      "nombre": "Adán",
-      "apellido": "Vera",
-      "documento": "4231937",
-      "tipodoc": "cedula",
-      "nacionalidad": "PARAGUAYA",
-      "correo": "adan@asf.com",
-      "telefono": "098877887",
-      "fechanacimiento": "06/01/1997",
-    },
-  ] */
-
+  const [editModal,setEditModal] = useState(false) 
+  const formatedData = formatedDataCliente(client)
+  const [modalShow, setModalShow] = useState(false);
 
   //onchange correspondiente para hacer la busqueda 
   const handleSearch = data => {
@@ -83,7 +45,6 @@ function DatosCliente() {
     }))
   }
 
-  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     const getClient = async () => {
@@ -97,7 +58,6 @@ function DatosCliente() {
     getClient()
   }, [])
 
-  const formatedData = formatedDataCliente(client)
 
   return (
     <Container fluid={true} className="main-content">
@@ -118,7 +78,8 @@ function DatosCliente() {
         </Col>
       </Row>
       <AddClient title={state?.title} clientes={client} show={modalShow} onHide={() => setModalShow(false)} />
-      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} />)}
+      <EditCliente title={'Editar'} clientes={client} show={editModal} onHide={() => setEditModal(false)} />
+      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} btnEdit = {setEditModal} />)}
 
     </Container>
   )

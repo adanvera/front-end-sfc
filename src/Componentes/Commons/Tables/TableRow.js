@@ -5,7 +5,7 @@ import PuntosActions from "../../puntos/PuntosActions";
 import ReglaActions from "../../Reglas/ReglaActions";
 
 export default function TableRow(props) {
-
+    console.log();
     const { data } = props
 
     const { pathname } = useLocation();
@@ -25,7 +25,7 @@ export default function TableRow(props) {
                                         pathname === '/puntos' && <PuntosActions />
                                     }
                                     {
-                                        pathname === '/clientes' && <ClientesActions id = {data.id}/>
+                                        pathname === '/clientes' && <ClientesActions id = {data.id} btnEdit = {props.btnEdit}/>
                                     }
                                     {
                                         pathname === '/reglas' && <ReglaActions />
