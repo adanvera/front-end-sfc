@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CLIENT_DEV } from '../Commons/Endpoint';
 
-const AddClient = props => {
+const EditCliente = props => {
     const [validated, setValidated] = useState(false);
     const client =  {
     nombre: "",
@@ -148,7 +148,7 @@ const AddClient = props => {
     )
 }
 
-export default AddClient
+export default EditCliente
 
 
 

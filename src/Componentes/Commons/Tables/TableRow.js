@@ -5,7 +5,7 @@ import PuntosActions from "../../puntos/PuntosActions";
 import ReglaActions from "../../Reglas/ReglaActions";
 
 export default function TableRow(props) {
-
+    console.log();
     const { data } = props
 
     const { pathname } = useLocation();
@@ -14,7 +14,8 @@ export default function TableRow(props) {
     return (
         <tr key={data.id} className="rowtable">
 
-            {Object.keys(data).map(col => {
+            {Object.keys(data).filter(item => item !== 'id').map(col => {
+                
                 return (
                     <Fragment key={col}>
                         {
@@ -24,7 +25,7 @@ export default function TableRow(props) {
                                         pathname === '/puntos' && <PuntosActions />
                                     }
                                     {
-                                        pathname === '/clientes' && <ClientesActions />
+                                        pathname === '/clientes' && <ClientesActions id = {data.id} btnEdit = {props.btnEdit}/>
                                     }
                                     {
                                         pathname === '/reglas' && <ReglaActions />
