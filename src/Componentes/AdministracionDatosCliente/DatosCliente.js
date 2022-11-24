@@ -15,15 +15,15 @@ function DatosCliente() {
 
   const initialState = {
     headers: {
-      "id": "#",
+      
       "nombre": "Nombre",
       "apellido": "Apellido",
-      "documento": "Nro. Documento",
       "tipoDocumento": "Tipo de documento",
+      "documento": "Nro. Documento",
       "nacionalidad": "Nacionalidad",
       "correo": "Correo",
       "telefono": "Teléfono",
-      "fechanacimiento": "Fecha de nacimiento",
+      
       "actions": "Acciones"
     },
     title: 'Agregar cliente'

@@ -14,7 +14,8 @@ export default function TableRow(props) {
     return (
         <tr key={data.id} className="rowtable">
 
-            {Object.keys(data).map(col => {
+            {Object.keys(data).filter(item => item !== 'id').map(col => {
+                
                 return (
                     <Fragment key={col}>
                         {
@@ -24,7 +25,7 @@ export default function TableRow(props) {
                                         pathname === '/puntos' && <PuntosActions />
                                     }
                                     {
-                                        pathname === '/clientes' && <ClientesActions />
+                                        pathname === '/clientes' && <ClientesActions id = {data.id}/>
                                     }
                                     {
                                         pathname === '/reglas' && <ReglaActions />
