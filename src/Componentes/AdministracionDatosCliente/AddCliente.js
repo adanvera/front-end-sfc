@@ -2,20 +2,46 @@ import React, { useState } from 'react'
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { CLIENT_DEV } from '../Commons/Endpoint';
 
 const AddClient = props => {
     const [validated, setValidated] = useState(false);
+    const client =  {
+    nombre: "Juan",
+    apellido: "Barrios",
+    documento: "4556443",
+    tipoDocumento: "cedula",
+    nacionalidad: "PARAGUAYA",
+    correo: "marcelo@asf.com",
+    telefono: "0987778895",
+    
+  }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(event);
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
-        console.log(form);
-        
         setValidated(true);
+        client[event.target.name] = event.target.value
+        
+        const req = await fetch(CLIENT_DEV,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body:JSON.stringify(client)
+        }),
+        res = await req.json()
+        console.log('Insertamos el cliente');
+        console.log(res);
+
+        
+        
     };
 
     return (
@@ -37,6 +63,7 @@ const AddClient = props => {
                                 required
                                 type="text"
                                 placeholder="Nombre"
+                                name='nombre'
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">Escribir nombre</Form.Control.Feedback>
@@ -47,6 +74,7 @@ const AddClient = props => {
                                 required
                                 type="text"
                                 placeholder="Apellido"
+                                name='apellido'
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">Escribir apellido</Form.Control.Feedback>
@@ -63,19 +91,19 @@ const AddClient = props => {
                         </div>
                         <Form.Group as={Col} md="6" controlId="validationCustom03">
                             <Form.Label>Número de documento</Form.Label>
-                            <Form.Control type="number" placeholder="Número de cédula" required />
+                            <Form.Control type="number" placeholder="Número de cédula" name='documento' required />
                             <Form.Control.Feedback type="invalid">Escribir número de documento</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Row className="mb-5" >
                         <Form.Group as={Col} md="6" controlId="validationCustom04">
                             <Form.Label>Correo electrónico</Form.Label>
-                            <Form.Control type="email" placeholder="Correo electrónico" required />
+                            <Form.Control type="email" placeholder="Correo electrónico" name='correo'required />
                             <Form.Control.Feedback type="invalid">Escribir correo electrónico válido</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="validationCustom04">
                             <Form.Label>Número de telefono</Form.Label>
-                            <Form.Control type="number" placeholder="Numero de telefono" required />
+                            <Form.Control type="number" placeholder="Numero de telefono" name='telefono' required />
                             <Form.Control.Feedback type="invalid">Escribir numero de telefono</Form.Control.Feedback>
                         </Form.Group>
                     </Row>

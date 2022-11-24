@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Cliente from '../../Models/Usuario';
+import { CLIENT_DEV } from '../Commons/Endpoint';
 import { formatedDataCliente } from '../Commons/helpers';
 import SearchTable from '../Commons/SearchTable';
 import Table from '../Commons/Tables/Table';
@@ -18,7 +19,7 @@ function DatosCliente() {
       "nombre": "Nombre",
       "apellido": "Apellido",
       "documento": "Nro. Documento",
-      "tipodoc": "Tipo de documento",
+      "tipoDocumento": "Tipo de documento",
       "nacionalidad": "Nacionalidad",
       "correo": "Correo",
       "telefono": "Teléfono",
@@ -29,12 +30,12 @@ function DatosCliente() {
   }
 
   const [state, setState] = useState(initialState)
-
+  const [loading,setLoading] = useState(true)
   const [isClientEmpty, setIsClientEmpty] = useState(true);
-  const [clientes, setClientes] = useState([cliente1, cliente2]);
+  const [client,setClient] = useState('')
 
 
-  const dataClient = [
+  /* const dataClient = [
     {
       "id": "1",
       "nombre": "Juan",
@@ -68,9 +69,7 @@ function DatosCliente() {
       "telefono": "098877887",
       "fechanacimiento": "06/01/1997",
     },
-  ]
-
-  const formatedData = formatedDataCliente(dataClient)
+  ] */
 
 
   //onchange correspondiente para hacer la busqueda 
@@ -86,6 +85,19 @@ function DatosCliente() {
 
   const [modalShow, setModalShow] = useState(false);
 
+  useEffect(()=>{
+    const getClient = async ()=>{
+      const req = await fetch(CLIENT_DEV),
+      res = await req.json()
+      
+      if(!req.ok)return
+      console.log(res);
+      setClient(res)
+      setLoading(false)
+    }
+    getClient()
+  },[])
+  const formatedData = formatedDataCliente([client])
 
   return (
     <Container fluid={true} className="main-content">
@@ -105,8 +117,9 @@ function DatosCliente() {
           </div>
         </Col>
       </Row>
-      <AddClient title={state?.title} clientes ={dataClient} show={modalShow} onHide={() => setModalShow(false)} />
-      <Table headers={state.headers} data={formatedData} />
+      <AddClient title={state?.title} clientes ={client} show={modalShow} onHide={() => setModalShow(false)} />
+      {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} />) }
+      
     </Container>
   )
 }

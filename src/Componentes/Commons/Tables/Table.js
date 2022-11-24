@@ -4,7 +4,8 @@ import TableRow from "./TableRow"
 
 
 export default function Table(props) {
-
+    console.log("Recibo estos datos");
+    console.log(props);
     const { data, headers } = props
 
     const listData = ((Object.keys(data).reverse().map(item => data[item])))
