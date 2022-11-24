@@ -17,6 +17,7 @@ function Navtop() {
                         <Link to="/puntos">Puntos</Link>
                         <Link to="/reglas">Reglas</Link>
                         <Link to="/canjes">Canjes</Link>
+                        <Link to="/compras">Compras</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

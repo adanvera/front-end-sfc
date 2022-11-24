@@ -85,3 +85,11 @@ button.button.btn-add.ml-2 {
 div#create {
   text-align: end;
 }
+
+div#infoclientes {
+  width: 70%;
+  background: #00E0FF;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}

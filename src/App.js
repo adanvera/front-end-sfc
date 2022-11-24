@@ -4,6 +4,7 @@ import Canjes from "./Componentes/Canjes/Canjes";
 import Dashborad from "./Componentes/Commons/Dashborad";
 import MainRoute from "./Componentes/Commons/MainRoute";
 import Navtop from "./Componentes/Commons/Navtop";
+import Compra from "./Componentes/Compras/Compra";
 import Puntos from "./Componentes/puntos/Puntos";
 import Reglas from "./Componentes/Reglas/Reglas";
 
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<Dashborad />} />
           </Route>
           <Route >
+            <Route exact path="/compras" element={<Compra />} />
             <Route exact path="/clientes" element={<DatosCliente />} />
             <Route exact path="/puntos" element={<Puntos />} />
             <Route exact path="/reglas" element={<Reglas />} />
