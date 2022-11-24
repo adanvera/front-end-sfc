@@ -22,7 +22,7 @@ export default function TableRow(props) {
                             col === 'actions' ?
                                 <td>
                                     {
-                                        pathname === '/puntos' && <PuntosActions />
+                                        pathname === '/puntos' && <PuntosActions id = {data.id} btnEdit = {props.btnEdit}/>
                                     }
                                     {
                                         pathname === '/clientes' && <ClientesActions id = {data.id} btnEdit = {props.btnEdit}/>
