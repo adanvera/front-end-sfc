@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Toaster } from 'react-hot-toast';
-import Cliente from '../../Models/Usuario';
 import { CLIENT_DEV } from '../Commons/Endpoint';
 import { formatedDataCliente } from '../Commons/helpers';
 import SearchTable from '../Commons/SearchTable';
@@ -22,7 +21,7 @@ function DatosCliente() {
       "nacionalidad": "Nacionalidad",
       "correo": "Correo",
       "telefono": "Teléfono",
-
+      "fechaNacimiento":"fechaNacimiento",
       "actions": "Acciones"
     },
     title: 'Agregar cliente'
@@ -31,7 +30,7 @@ function DatosCliente() {
   const [state, setState] = useState(initialState)
   const [loading, setLoading] = useState(true)
   const [client, setClient] = useState('')
-  const [editModal, setEditModal] = useState(false)
+  const [editModal, setEditModal] = useState({status:false,id:''})
   const formatedData = formatedDataCliente(client)
   const [modalShow, setModalShow] = useState(false);
 
@@ -83,7 +82,7 @@ function DatosCliente() {
         </Col>
       </Row>
       <AddClient title={state?.title} clientes={client} show={modalShow} onHide={() => setModalShow(false)} />
-      <EditCliente title={'Editar'} clientes={client} show={editModal} onHide={() => setEditModal(false)} />
+      <EditCliente title={'Editar'} clientes={client} show={editModal.status} uid = {editModal.id} onHide={() => setEditModal(false)} />
       {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} btnEdit={setEditModal} />)}
 
     </Container>

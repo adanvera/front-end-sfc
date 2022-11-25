@@ -76,6 +76,7 @@ export const formatedDataCliente = (data) => {
                     nacionalidad: item.nacionalidad,
                     correo: item.correo,
                     telefono: item.telefono,
+                    fechaNacimiento:item.fechaNacimiento,
                     actions: 'x x',
                 }
             }
