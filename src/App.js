@@ -22,7 +22,7 @@ function App() {
           <Route >
             <Route exact path="/compras" element={<Compra />} />
             <Route exact path="/clientes" element={<DatosCliente />} />
-            <Route exact path="/puntos" element={<Puntos />} />
+            <Route exact path="/bolsapuntos" element={<Puntos />} />
             <Route exact path="/reglas" element={<Reglas />} />
             <Route exact path="/canjes" element={<Canjes />} />
             <Route exact path="/compras" element={<Compra />} />

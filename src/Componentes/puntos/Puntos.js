@@ -1,39 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Punto from '../../Models/Punto';
+import { BOLSA } from '../Commons/Endpoint';
 import { formatDataPuntos } from '../Commons/helpers';
 import SearchTable from '../Commons/SearchTable';
 import Table from '../Commons/Tables/Table';
 import AddPuntos from './AddPuntos';
 
-//Datos solo para pruebas
-const punto1 = new Punto('01', 'Vale de Consumision', '50')
-const punto2 = new Punto('02', 'Vale de Descuento', '100')
-
-const dataPuntos = [
-  {
-    "id": "1",
-    "description": "Vale de Consumision",
-    "puntosrequeridos": "50",
-  },
-  {
-    "id": "2",
-    "description": "Vale de Descuento",
-    "puntosrequeridos": "100",
-  },
-]
-
-const formatedData = formatDataPuntos(dataPuntos)
 
 function Puntos() {
 
   const initialState = {
 
     headers: {
-      id: '#',
-      description: "Descripcion",
-      puntosrequeridos: "Puntos requeridos",
-      actions: "Acciones"
+      documentoCliente: "Documento",
+      montoOperacion: "Monto",
+      puntajeAsignado: "Puntaje Asignado",
+      fechaAsignacionPuntaje: "Fecha Asignacion",
+      ultimoPuntajeUtilizado: "Ultimo Puntaje Utilizado",
+      fechaCaducidadPuntaje: "Fecha Caducidad",
+      saldoPuntos: "Saldo Puntos",
+      status: "Estado",
     },
     title: "Agregar premio"
   }
@@ -41,9 +28,8 @@ function Puntos() {
   const [state, setState] = useState(initialState)
 
   const [isPuntoEmpty, setisPuntoEmpty] = useState(true);
-  const [puntos, setPuntos] = useState([punto1, punto2]);
-
-  const [modalShow, setModalShow] = useState(false);
+  const [bolsaPuntos, setBolsaPuntos] = useState('')
+  const formatedData = formatDataPuntos(bolsaPuntos)
 
   //onchange correspondiente para hacer la busqueda 
   const handleSearch = data => {
@@ -56,6 +42,26 @@ function Puntos() {
     }))
   }
 
+  useEffect(() => {
+
+    const getBolsaPuntos = async () => {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+
+      try {
+        const response = await fetch(BOLSA, options)
+        const data = await response.json()
+        setBolsaPuntos(data.bolsas)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getBolsaPuntos()
+  }, [])
 
   return (
 
@@ -70,13 +76,7 @@ function Puntos() {
             handleChange={handleSearch}
           />
         </Col>
-        <Col className="ordercol" >
-          <div className="col-md-6" id='adduser' onClick={() => setModalShow(true)}>
-            <button className=" button btn-add ml-2">Definir nuevo punto</button>
-          </div>
-        </Col>
       </Row>
-      <AddPuntos title={state?.title} show={modalShow} onHide={() => setModalShow(false)} />
       <Table headers={state.headers} data={formatedData} />
     </Container>
 

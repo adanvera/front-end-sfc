@@ -41,33 +41,6 @@ function Compra() {
     const verifyCedula = Number(state.documento).toString().length
     const parametro = verifyCedula
 
-    // const searchClient = async (parametro) => {
-    //     const idclient = state.documento
-    //     if (parametro >= 6) {
-    //         try {
-    //             const response = await fetch(CLIENT_DEV + idclient)
-    //             const data = await response.json()
-    //             setClient(data?.client)
-    //             setState(prev => ({
-    //                 ...prev,
-    //                 nombre: data?.client?.nombre,
-    //                 apellido: data?.client?.apellido,
-    //                 tipoDocumento: data?.client?.tipoDocumento,
-    //                 documento: data?.client?.documento,
-    //                 correo: data?.client?.correo,
-    //                 telefono: data?.client?.telefono,
-    //                 nacionalidad: data?.client?.nacionalidad,
-    //                 fechaNacimiento: data?.client?.fechaNacimiento,
-    //                 saldo: data?.client?.saldo
-    //             }))
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    // }
-
-    // searchClient(parametro)
-
     window.localStorage.setItem("idclient", "0")
     const [verify, setVerify] = useState(false)
 
@@ -98,9 +71,7 @@ function Compra() {
 
     const clientToShow = client.client
 
-    console.log(clientToShow);
     let timeToWait
-
 
     const navigate = useNavigate()
 
@@ -134,7 +105,6 @@ function Compra() {
             try {
                 const response = await fetch(COMPRA, options)
                 const data = await response.json()
-                console.log(data)
                 console.log('Compra realizada con exito');
                 toast.success(data.msg)
                 setState(initialState)

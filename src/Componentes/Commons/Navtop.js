@@ -14,7 +14,7 @@ function Navtop() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Link to="/clientes">Clientes</Link>
-                        <Link to="/puntos">Puntos</Link>
+                        <Link to="/bolsapuntos">Bolsa puntos</Link>
                         <Link to="/reglas">Reglas</Link>
                         <Link to="/canjes">Canjes</Link>
                         <Link to="/compras">Compras</Link>
