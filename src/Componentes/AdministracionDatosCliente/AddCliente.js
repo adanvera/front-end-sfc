@@ -45,6 +45,9 @@ const AddClient = props => {
             console.log('Insertamos el cliente');
             console.log(res);     
             toast.success('Cliente creado existosamente')
+            setTimeout(()=>{
+                window.location.reload()
+            },1300)
         } catch (error) {
             console.log(error);
             toast.success('Ocurio un error al crear el cliente')
