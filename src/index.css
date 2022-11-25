@@ -116,3 +116,15 @@ span.withsaldo {
 .mt-3.row.row-cols-md-4 {
   justify-content: start;
 }
+
+.available{
+  color:green;
+}
+
+.notavailable{
+  color: orange;
+}
+
+.expired{
+  color: red;
+}

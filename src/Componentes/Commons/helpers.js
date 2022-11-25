@@ -36,13 +36,13 @@ export const verifyStatus = (status, dateVen) => {
     const today = new Date() // fecha actual
 
     if (status === true) {
-        return <span className="status">Disponible</span>
+        return <div className="available"><span >Disponible </span><ion-icon name="checkmark-circle-outline"></ion-icon></div>
     }
     if (vencimiento < today) {
-        return <span className="status">Expirado</span>
+        return <div className="expired"><span >Expirado </span><ion-icon name="alarm-outline"></ion-icon></div>
     }
     if (status === false) {
-        return <span className="status">No disponible</span>
+        return <div className="notavailable"><span >No disponible</span> <ion-icon name="alert-circle-outline"></ion-icon></div>
     }
 }
 

@@ -70,7 +70,7 @@ const Canjes = (props) => {
     getPremios()
 
     const idclient = state.documento
-    
+
     if (parametro >= 7 && verify === false) {
       const getClient = async () => {
         try {
@@ -159,11 +159,11 @@ const Canjes = (props) => {
             <h5>Hacer un canje</h5>
           </div>
         </Col>
-        <Col md={4}>
+        {/* <Col md={4}>
           <div className="mt-4">
             <h5>Puntos disponibles</h5>
           </div>
-        </Col>
+        </Col> */}
       </Row>
       <Col md={12}>
         <Row>
