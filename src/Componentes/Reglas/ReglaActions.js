@@ -1,28 +1,28 @@
 import React from 'react'
 import { REGLA_DEV } from '../Commons/Endpoint';
-function ReglaActions() {
-    const handleDelete = async (e) =>{
+const ReglaActions = (props) => {
+    const handleDelete = async (e) => {
         const id = e.target.value;
 
-         
+
         try {
-            const req = await fetch(REGLA_DEV+id,{
+            const req = await fetch(REGLA_DEV + id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                
+
             }),
-            res = await req.json()
+                res = await req.json()
             console.log('Eliminamos la regla');
-            console.log(res);     
+            console.log(res);
         } catch (error) {
             console.log(error);
         }
 
     }
-    const handleEdit =  async (e) =>{
+    const handleEdit = async (e) => {
         props.btnEdit(true)
         console.log('Editando');
         console.log(e.target.value);
