@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap'
+import { REGLA_DEV } from '../Commons/Endpoint'
 import { formatDataRegla } from '../Commons/helpers'
 import SearchTable from '../Commons/SearchTable'
 import Table from '../Commons/Tables/Table'
 import AddRegla from './AddRegla'
-
+import EditRegla from './EditRegla'
+import { Toaster } from 'react-hot-toast';
 function Reglas() {
 
     const initialState = {
@@ -20,69 +22,65 @@ function Reglas() {
     }
 
     const [state, setState] = useState(initialState)
-
+    const [loading, setLoading] = useState(true)
+    const [regla, setRegla] = useState('')
+    const [editModal, setEditModal] = useState({status:false,id:''})
+    const formatedData = formatDataRegla(regla)
     const [modalShow, setModalShow] = useState(false);
-
-    const dataRegla = [
-        {
-            "id": "1",
-            "description": "Regla 1",
-            "limiteinferior": "0 Gs.",
-            "limitesuperior": "80.000 Gs.",
-            "equivalencia": "18 pts.",
-        },
-        {
-            "id": "2",
-            "description": "Regla 2",
-            "limiteinferior": "80.000 Gs.",
-            "limitesuperior": "160.000 Gs.",
-            "equivalencia": "68 pts.",
-        },
-        {
-            "id": "3",
-            "description": "Regla 3",
-            "limiteinferior": "160.000 Gs.",
-            "limitesuperior": "300.000 Gs.",
-            "equivalencia": "98 pts.",
-        },
-
-    ]
-
-    const formatedData = formatDataRegla(dataRegla)
-
+  
     //onchange correspondiente para hacer la busqueda 
     const handleSearch = data => {
-        setState(prev => ({
-            ...prev,
-            filtros: {
-                ...prev.filtros,
-                nombre: data,
-            },
-        }))
+      setState(prev => ({
+        ...prev,
+        filtros: {
+          ...prev.filtros,
+          nombre: data,
+        },
+      }))
     }
-
+  
+  
+    useEffect(() => {
+      const getRegla = async () => {
+        const req = await fetch(REGLA_DEV),
+          res = await req.json()
+  
+        if (!req.ok) return
+        setRegla(res?.reglas)
+        setLoading(false)
+      }
+      getRegla()
+    }, [])
+  
+  
     return (
-        <Container fluid={true} md={12} >
-            <div className="mt-4">
-                <h5>Lista de reglas</h5>
+      <Container fluid={true} className="main-content">
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
+        <div className="mt-4">
+          <h5>Lista de Reglas</h5>
+        </div>
+        <Row className="mb-3">
+          <Col>
+            <SearchTable
+              placeholder='Buscar una regla...'
+              handleChange={handleSearch}
+            />
+          </Col>
+          <Col className="ordercol" >
+            <div className="col-md-6" id='adduser' onClick={() => setModalShow(true)}>
+              <button className=" button btn-add ml-2">Agregar regla</button>
             </div>
-            <Row className="mb-3">
-                <Col>
-                    <SearchTable
-                        placeholder='Buscar una regla...'
-                        handleChange={handleSearch}
-                    />
-                </Col>
-                <Col className="ordercol" >
-                    <div className="col-md-6" id='adduser' onClick={() => setModalShow(true)}>
-                        <button className=" button btn-add ml-2">Agregar regla</button>
-                    </div>
-                </Col>
-            </Row>
-            <AddRegla title={state?.title} show={modalShow} onHide={() => setModalShow(false)} />
-            <Table headers={state.headers} data={formatedData} />
-        </Container>
+          </Col>
+        </Row>
+        <AddRegla title={state?.title} reglas={regla} show={modalShow} onHide={() => setModalShow(false)} />
+        <EditRegla title={'Editar'} reglas={regla} show={editModal.status} uid = {editModal.id} onHide={() => setEditModal(false)} />
+        {loading === true ? (null) : (<Table headers={state.headers} data={formatedData} btnEdit={setEditModal} />)}
+  
+      </Container>
     )
-}
+  }
 
 export default Reglas
