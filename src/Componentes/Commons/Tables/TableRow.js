@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import ClientesActions from "../../AdministracionDatosCliente/ClientesActions";
+import PremiosActions from "../../Premios/PremiosActions";
 import PuntosActions from "../../puntos/PuntosActions";
 import ReglaActions from "../../Reglas/ReglaActions";
 
@@ -31,7 +32,7 @@ export default function TableRow(props) {
                                         pathname === '/reglas' && <ReglaActions id={data.id} btnEdit={props.btnEdit} />
                                     }
                                     {
-                                        pathname === '/' && <>a mimir</>
+                                        pathname === '/premios' && <PremiosActions id={data.id} btnEdit={props.btnEdit} />
                                     }
                                 </td>
                                 :

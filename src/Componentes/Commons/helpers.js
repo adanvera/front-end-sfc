@@ -104,3 +104,21 @@ export const formatDataRegla = (data) => {
     }
     return obData
 }
+
+export const formatDataPremio = (data) => {
+    let obData = {}
+    if (data) {
+        data.forEach(item => {
+            obData = {
+                ...obData,
+                [item.uid]: {
+                    id: item.uid,
+                    descripcion: item.descripcion,
+                    equivalencia: item.equivalencia + " Pts.",
+                    actions: 'x x',
+                }
+            }
+        })
+    }
+    return obData
+}

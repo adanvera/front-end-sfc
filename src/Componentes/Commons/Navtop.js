@@ -18,6 +18,7 @@ function Navtop() {
                         <Link to="/reglas">Reglas</Link>
                         <Link to="/canjes">Canjes</Link>
                         <Link to="/compras">Compras</Link>
+                        <Link to="/premios">Premios</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

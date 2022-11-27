@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap'
 import toast, { Toaster } from 'react-hot-toast'
+import Swal from 'sweetalert2'
 import { BOLSA, CANJE, CLIENT_DEV, PREMIOS } from '../Commons/Endpoint'
 
 const Canjes = (props) => {
@@ -116,28 +117,50 @@ const Canjes = (props) => {
   const submitCanje = async (e) => {
     e.preventDefault()
 
-    const toCanje = {
-      documentoCliente: state.documento,
-    }
-    const uiiid = uid
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ documentoCliente: state?.documento })
-    }
     try {
-      const response = await fetch(CANJE + uiiid, options)
-      const data = await response.json()
-      console.log(data);
-      if (data.msg === 'Canje agregada exitosamente') {
-        toast.success(data.msg)
+      let isDeleted = false
+      let data = await Swal.fire({
+        title: 'ATENCIÓN',
+        text: "¿Estas seguro de canjear este premio?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Canjear'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          isDeleted = true
+        }
+      })
+
+
+      if (isDeleted) {
+
+        const toCanje = {
+          documentoCliente: state.documento,
+        }
+        const uiiid = uid
+
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ documentoCliente: state?.documento })
+        }
+
+        const response = await fetch(CANJE + uiiid, options)
+        const data = await response.json()
+        console.log(data);
+        if (data.msg === 'Canje agregada exitosamente') {
+          toast.success(data.msg)
+        }
+        if (data.msg === 'Ocurrio un error inesperado al crear el canje') {
+          toast.error("Error!" + " Actualmente no dispone de puntos suficientes para realizar el canje")
+        }
       }
-      if (data.msg === 'Ocurrio un error inesperado al crear el canje') {
-        toast.error("Error!" + " Actualmente no dispone de puntos suficientes para realizar el canje")
-      }
+
     } catch (error) {
       console.log(error)
       toast.error('Error al realizar el canje')

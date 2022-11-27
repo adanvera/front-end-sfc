@@ -105,17 +105,12 @@ function Compra() {
             try {
                 const response = await fetch(COMPRA, options)
                 const data = await response.json()
-                console.log('Compra realizada con exito');
                 console.log(data.msg);
-
-                if (data.msg === 'Compra realizada con exito') {
+                if(data.msg === "Compra agregada exitosamente"){
+                    toast.success("Compra realizada exitosamente")
                     redirectPage()
-                    toast.success(data.msg)
-                    redirectPage()
-                }
-                if (data.msg === 'Error al asignar puntos, no existe regla para el monto ingresado') {
-                    toast.error(data.msg)
-                    redirectPage()
+                }else{
+                    toast.error("Ocurrio un error inesperado")
                 }
                 setState(initialState)
             } catch (error) {

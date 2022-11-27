@@ -3,31 +3,27 @@ import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import toast from 'react-hot-toast';
-import { REGLA_DEV } from '../Commons/Endpoint'
+import { PREMIOS } from '../Commons/Endpoint'
 
 
-const EditRegla = props => {
+const EditarPremio = props => {
 
     const { uid } = props;
-    const { reglas } = props
+    const { premios } = props
     const [validated, setValidated] = useState(false);
 
-    const [regla, setRegla] = useState(
+    const [premio, setPremio] = useState(
         {
-            description: "",
-            limitInferior: "",
-            limitSuperior: "",
+            descripcion: "",
             equivalencia: "",
         }
     )
 
     useEffect(() => {
-        if (reglas) {
-            reglas.forEach(el => {
+        if (premios) {
+            premios.forEach(el => {
                 if (el.uid === uid) {
-                    setRegla(el)
-                    console.log("Regla ahora");
-                    console.log(regla);
+                    setPremio(el)
                 }
             });
         }
@@ -36,7 +32,7 @@ const EditRegla = props => {
     const handleChange = (e) => {
         e.preventDefault();
 
-        setRegla(prevState => {
+        setPremio(prevState => {
             const updatedValues = {
                 ...prevState,
                 [e.target.name]: e.target.value,
@@ -47,7 +43,8 @@ const EditRegla = props => {
     }
 
 
-    //Editamos la regla
+
+    //Editamos el premio
     const handleSubmit = async (event) => {
 
         event.preventDefault();
@@ -59,16 +56,16 @@ const EditRegla = props => {
         }
         setValidated(true);
         try {
-            const req = await fetch(REGLA_DEV + regla.uid, {
+            const req = await fetch(PREMIOS + premio.uid, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(regla)
+                body: JSON.stringify(premio)
             }),
                 res = await req.json()
             if (!req.ok) return toast.error("Ocurrio un error inesperado")
-            toast.success("Regla modificada exitosamente")
+            toast.success("Premio modificada exitosamente")
             setTimeout(() => {
                 window.location.reload()
             }, 1300)
@@ -98,40 +95,12 @@ const EditRegla = props => {
                                 required
                                 type="text"
                                 placeholder="Descripcion"
-                                name='description'
-                                value={regla?.description}
+                                name='descripcion'
+                                value={premio?.descripcion}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">Escribir Descripcion</Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
-                    <Row>
-                        <Form.Group as={Col} md="6" controlId="validationCustom02">
-                            <Form.Label>Limite inferior</Form.Label>
-                            <Form.Control
-                                required
-                                type="number"
-                                placeholder="Limite inferior"
-                                name='limitInferior'
-                                value={regla?.limitInferior}
-                                onChange={(e) => handleChange(e)}
-                            />
-                            <Form.Control.Feedback>Bien!</Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">Escribir limite inferior</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group as={Col} md="6" controlId="validationCustom02">
-                            <Form.Label>Limite superior</Form.Label>
-                            <Form.Control
-                                required
-                                type="number"
-                                placeholder="Limite superior"
-                                name='limitSuperior'
-                                value={regla?.limitSuperior}
-                                onChange={(e) => handleChange(e)}
-                            />
-                            <Form.Control.Feedback>Bien!</Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">Escribir limite superior</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Row>
@@ -142,7 +111,7 @@ const EditRegla = props => {
                                 type="number"
                                 placeholder="Puntos requeridos"
                                 name='equivalencia'
-                                value={regla?.equivalencia}
+                                value={premio?.equivalencia}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -163,7 +132,7 @@ const EditRegla = props => {
     )
 }
 
-export default EditRegla
+export default EditarPremio
 
 
 
