@@ -2,54 +2,56 @@ import React, { useState } from 'react'
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import toast from 'react-hot-toast';
 import { REGLA_DEV } from '../Commons/Endpoint';
 const AddRegla = props => {
 
     const [validated, setValidated] = useState(false);
-    const regla =  {
+    const regla = {
         "description": "",
-        "limiteinferior": "",
-        "limitesuperior": "",
+        "limitInferior": "",
+        "limitSuperior": "",
         "equivalencia": "",
-        
-      }
 
-    const handleChange = (e) =>{
+    }
+
+    const handleChange = (e) => {
         regla[e.target.name] = e.target.value
     }
 
-     //Agregamos la regla
-     const handleSubmit = async (event) => {
+    //Agregamos la regla
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(event);
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
         setValidated(true);
-        console.log(regla);
         try {
-            const req = await fetch(REGLA_DEV,{
+            const req = await fetch(REGLA_DEV, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body:JSON.stringify(regla)
+                body: JSON.stringify(regla)
             }),
-            res = await req.json()
+                res = await req.json()
             console.log('Insertamos la regla');
-            console.log(res);     
+            if (res.msg === 'Regla agregada exitosamente') {
+                toast.success('Regla creada exitosamente');
+                setTimeout(() => {
+                    window.location.reload()
+                }, 800)
+            } else if (res.msg !== 'Regla agregada exitosamente') {
+                toast.error('Error al crear la regla');
+            }
         } catch (error) {
             console.log(error);
         }
-        
 
-        
-        
     };
-    
+
 
     return (
         <Modal
@@ -70,7 +72,7 @@ const AddRegla = props => {
                                 required
                                 type="text"
                                 placeholder="Descripcion"
-                                name='descripcion'
+                                name='description'
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -84,7 +86,7 @@ const AddRegla = props => {
                                 required
                                 type="number"
                                 placeholder="Limite inferior"
-                                name='limiteinferior'
+                                name='limitInferior'
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -96,7 +98,7 @@ const AddRegla = props => {
                                 required
                                 type="number"
                                 placeholder="Limite superior"
-                                name='limitesuperior'
+                                name='limitSuperior'
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>

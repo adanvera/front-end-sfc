@@ -15,20 +15,20 @@ export default function TableRow(props) {
         <tr key={data.id} className="rowtable">
 
             {Object.keys(data).filter(item => item !== 'id').map(col => {
-                
+
                 return (
                     <Fragment key={col}>
                         {
                             col === 'actions' ?
                                 <td>
                                     {
-                                        pathname === '/puntos' && <PuntosActions id = {data.id} btnEdit = {props.btnEdit}/>
+                                        pathname === '/puntos' && <PuntosActions id={data.id} btnEdit={props.btnEdit} />
                                     }
                                     {
-                                        pathname === '/clientes' && <ClientesActions id = {data.id} btnEdit = {props.btnEdit}/>
+                                        pathname === '/clientes' && <ClientesActions id={data.id} btnEdit={props.btnEdit} />
                                     }
                                     {
-                                        pathname === '/reglas' && <ReglaActions />
+                                        pathname === '/reglas' && <ReglaActions id={data.id} btnEdit={props.btnEdit} />
                                     }
                                     {
                                         pathname === '/' && <>a mimir</>

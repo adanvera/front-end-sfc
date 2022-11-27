@@ -6,50 +6,52 @@ import toast from 'react-hot-toast';
 import { CLIENT_DEV } from '../Commons/Endpoint';
 
 const EditCliente = props => {
-    const {uid} =  props;
-    const {clientes} = props
+    const { uid } = props;
+    const { clientes } = props
     const [validated, setValidated] = useState(false);
-    const[client,setClient] = useState(
+
+    console.log(props
+        );
+
+    const [client, setClient] = useState(
         {
             nombre: "",
             apellido: "",
             documento: "",
             tipoDocumento: "",
             nacionalidad: "",
-            fechaNacimiento:"",
+            fechaNacimiento: "",
             correo: "",
             telefono: "",
-            
-            }
+
+        }
     )
-    
-    
-    useEffect(()=>{
-        if(clientes){
-            clientes.forEach( el => {
-                if( el.uid === uid ){
-                    
+
+    useEffect(() => {
+        if (clientes) {
+            clientes.forEach(el => {
+                if (el.uid === uid) {
                     setClient(el)
                     console.log("CLiente ahora");
                     console.log(client);
                 }
             });
-        }    
-    },[uid])
-    
-   
-    
-    const handleChange = (e) =>{
+        }
+    }, [uid])
+
+
+
+    const handleChange = (e) => {
         e.preventDefault();
         setClient(prevState => {
             const updatedValues = {
-                    ...prevState,
-                    [e.target.name]: e.target.value,
+                ...prevState,
+                [e.target.name]: e.target.value,
             }
-        return { ...updatedValues };
+            return { ...updatedValues };
         })
     }
-    
+
     //Editamos el  cliente
     const handleSubmit = async (event) => {
         console.log("CLiente a EDITAR");
@@ -63,28 +65,25 @@ const EditCliente = props => {
         }
         setValidated(true);
         try {
-            const req = await fetch(CLIENT_DEV+client.documento,{
+            const req = await fetch(CLIENT_DEV + client.documento, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                     // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body:JSON.stringify(client)
+                body: JSON.stringify(client)
             }),
-            res = await req.json()
-            if(!req.ok)return toast.error("Ocurrio un error inesperado")
+                res = await req.json()
+            if (!req.ok) return toast.error("Ocurrio un error inesperado")
             toast.success("Usuario modificado correctamente")
-            setTimeout(()=>{
+            setTimeout(() => {
                 window.location.reload()
-            },1300)    
-            console.log(res);     
+            }, 1300)
+            console.log(res);
         } catch (error) {
             console.log(error);
         }
-        
 
-        
-        
     };
 
     return (
@@ -107,7 +106,7 @@ const EditCliente = props => {
                                 type="text"
                                 placeholder="Nombre"
                                 name='nombre'
-                                value = {client.nombre}
+                                value={client.nombre}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -120,7 +119,7 @@ const EditCliente = props => {
                                 type="text"
                                 placeholder="Apellido"
                                 name='apellido'
-                                value = {client.apellido}
+                                value={client.apellido}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -130,8 +129,8 @@ const EditCliente = props => {
                     <Row className="mb-3">
                         <div className="col-md-6">
                             <Form.Label>Tipo de documento</Form.Label>
-                                
-                            <Form.Select  value = {client.tipoDocumento} as={Col} md="6" aria-label="Default select example" name = 'tipoDocumento' onChange={(e) => handleChange(e)} >
+
+                            <Form.Select value={client.tipoDocumento} as={Col} md="6" aria-label="Default select example" name='tipoDocumento' onChange={(e) => handleChange(e)} >
                                 <option>Seleccionar</option>
                                 <option value="cedula">Cedula de identidad</option>
                                 <option value="pasaporte">Pasaporte</option>
@@ -151,14 +150,14 @@ const EditCliente = props => {
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="validationCustom04">
                             <Form.Label>Número de telefono</Form.Label>
-                            <Form.Control type="number" placeholder="Numero de telefono" name='telefono' onChange={(e) => handleChange(e)} value={client.telefono}required />
+                            <Form.Control type="number" placeholder="Numero de telefono" name='telefono' onChange={(e) => handleChange(e)} value={client.telefono} required />
                             <Form.Control.Feedback type="invalid">Escribir numero de telefono</Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Row className="mb-5" >
-                    <div className="col-md-6">
+                        <div className="col-md-6">
                             <Form.Label>Nacionalidad</Form.Label>
-                            <Form.Select as={Col} md="6" aria-label="Default select example " name = 'nacionalidad' onChange={(e) => handleChange(e)} value={client.nacionalidad}>
+                            <Form.Select as={Col} md="6" aria-label="Default select example " name='nacionalidad' onChange={(e) => handleChange(e)} value={client.nacionalidad}>
                                 <option>Nacionalidad</option>
                                 <option value="Paraguaya">Paraguaya</option>
                                 <option value="Extranjero">Extranjero</option>
@@ -166,7 +165,7 @@ const EditCliente = props => {
                         </div>
                         <Form.Group as={Col} md="6" controlId="validationCustom04">
                             <Form.Label>Fecha Nacimiento</Form.Label>
-                            <Form.Control type="date" placeholder="fecha de nacimiento" name='fechaNacimiento' onChange={(e) => handleChange(e)}  value={client.fechaNacimiento} required />
+                            <Form.Control type="date" placeholder="fecha de nacimiento" name='fechaNacimiento' onChange={(e) => handleChange(e)} value={client.fechaNacimiento} required />
                         </Form.Group>
                     </Row>
                     <Row>

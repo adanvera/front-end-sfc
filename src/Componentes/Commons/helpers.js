@@ -76,7 +76,7 @@ export const formatedDataCliente = (data) => {
                     nacionalidad: item.nacionalidad,
                     correo: item.correo,
                     telefono: item.telefono,
-                    fechaNacimiento:item.fechaNacimiento,
+                    fechaNacimiento: item.fechaNacimiento,
                     actions: 'x x',
                 }
             }
@@ -91,12 +91,12 @@ export const formatDataRegla = (data) => {
         data.forEach(item => {
             obData = {
                 ...obData,
-                [item.id]: {
-                    id: item.id,
+                [item.uid]: {
+                    id: item.uid,
                     description: item.description,
-                    limiteinferior: item.limiteinferior,
-                    limitesuperior: item.limitesuperior,
-                    equivalencia: item.equivalencia,
+                    limitInferior: item.limitInferior + " Gs.",
+                    limitSuperior: item.limitSuperior + " Gs.",
+                    equivalencia: item.equivalencia + " Pts.",
                     actions: 'x x',
                 }
             }

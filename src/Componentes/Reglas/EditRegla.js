@@ -4,54 +4,54 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import toast from 'react-hot-toast';
 import { REGLA_DEV } from '../Commons/Endpoint'
+
+
 const EditRegla = props => {
-    const {uid} =  props;
-    const {reglas} = props
+
+    const { uid } = props;
+    const { reglas } = props
     const [validated, setValidated] = useState(false);
-    const[regla,setRegla] = useState(
+
+    const [regla, setRegla] = useState(
         {
-            "description": "",
-            "limiteinferior": "",
-            "limitesuperior": "",
-            "equivalencia": "",
-            
-            
-            }
+            description: "",
+            limitInferior: "",
+            limitSuperior: "",
+            equivalencia: "",
+        }
     )
-    
-    
-    useEffect(()=>{
-        if(reglas){
-            reglas.forEach( el => {
-                if( el.uid === uid ){
-                    
+
+    useEffect(() => {
+        if (reglas) {
+            reglas.forEach(el => {
+                if (el.uid === uid) {
                     setRegla(el)
                     console.log("Regla ahora");
                     console.log(regla);
                 }
             });
-        }    
-    },[uid])
-    
-   
-    
-    const handleChange = (e) =>{
+        }
+    }, [uid])
+
+    const handleChange = (e) => {
         e.preventDefault();
+
         setRegla(prevState => {
             const updatedValues = {
-                    ...prevState,
-                    [e.target.name]: e.target.value,
+                ...prevState,
+                [e.target.name]: e.target.value,
             }
-        return { ...updatedValues };
+            return { ...updatedValues };
         })
+
     }
-    
+
+
     //Editamos la regla
     const handleSubmit = async (event) => {
-        console.log("Regla a EDITAR");
-        console.log(regla);
+
         event.preventDefault();
-        console.log(event);
+
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
@@ -59,28 +59,24 @@ const EditRegla = props => {
         }
         setValidated(true);
         try {
-            const req = await fetch(REGLA_DEV+regla.documento,{
+            const req = await fetch(REGLA_DEV + regla.uid, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body:JSON.stringify(regla)
+                body: JSON.stringify(regla)
             }),
-            res = await req.json()
-            if(!req.ok)return toast.error("Ocurrio un error inesperado")
-            toast.success("Usuario modificado correctamente")
-            setTimeout(()=>{
+                res = await req.json()
+            if (!req.ok) return toast.error("Ocurrio un error inesperado")
+            toast.success("Regla modificada exitosamente")
+            setTimeout(() => {
                 window.location.reload()
-            },1300)    
-            console.log(res);     
+            }, 800)
+            console.log(res);
         } catch (error) {
             console.log(error);
         }
-        
 
-        
-        
     };
 
     return (
@@ -102,7 +98,8 @@ const EditRegla = props => {
                                 required
                                 type="text"
                                 placeholder="Descripcion"
-                                name='descripcion'
+                                name='description'
+                                value={regla?.description}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -116,19 +113,21 @@ const EditRegla = props => {
                                 required
                                 type="number"
                                 placeholder="Limite inferior"
-                                name='limiteinferior'
+                                name='limitInferior'
+                                value={regla?.limitInferior}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
                             <Form.Control.Feedback type="invalid">Escribir limite inferior</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="validationCustom02">
-                            <Form.Label>Limite superir</Form.Label>
+                            <Form.Label>Limite superior</Form.Label>
                             <Form.Control
                                 required
                                 type="number"
                                 placeholder="Limite superior"
-                                name='limitesuperior'
+                                name='limitSuperior'
+                                value={regla?.limitSuperior}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
@@ -143,6 +142,7 @@ const EditRegla = props => {
                                 type="number"
                                 placeholder="Puntos requeridos"
                                 name='equivalencia'
+                                value={regla?.equivalencia}
                                 onChange={(e) => handleChange(e)}
                             />
                             <Form.Control.Feedback>Bien!</Form.Control.Feedback>
