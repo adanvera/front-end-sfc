@@ -6,11 +6,21 @@ import { Link } from 'react-router-dom';
 import DatosCliente from '../AdministracionDatosCliente/DatosCliente';
 
 function Navtop() {
-    const token = localStorage.getItem('mostrar')
+
+    const validate = localStorage.getItem('mostrar');
+    console.log(validate);
+
+
+    const logOut = () => {
+        localStorage.clear();
+        window.location('/');
+        window.location.reload();
+    }
+
     return (
         <>
             {
-                token !== null ?
+                validate !== null ?
                     <Navbar bg="light" expand="lg">
                         <Container fluid={true} >
                             <Navbar.Brand><Link to="/dashboard">Sistema de fidelización</Link></Navbar.Brand>
@@ -23,6 +33,9 @@ function Navtop() {
                                     <Link to="/canjes">Canjes</Link>
                                     <Link to="/compras">Compras</Link>
                                     <Link to="/premios">Premios</Link>
+                                </Nav>
+                                <Nav>
+                                    <Link to="/" onClick={logOut}>Cerrar sesión</Link>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
