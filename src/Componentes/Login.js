@@ -51,7 +51,7 @@ function Login() {
                 localStorage.setItem('email', data.user.email);
                 localStorage.setItem('name', data.user.name);
                 localStorage.setItem('lastname', data.user.last_name);
-                window.location.href = '/dashboard';
+                //window.location.href = '/dashboard';
             } catch (error) {
                 console.log(error);
             }
@@ -62,7 +62,12 @@ function Login() {
 
     }
 
-
+        const [captcha, setCaptcha] = useState(false);
+        var onClick = function() {
+            alert("grecaptcha is ready!");
+            document.getElementById("submit").submit();
+        };
+  
     return (
         <Container isFluid={true} className="m-5">
             <Row>
@@ -77,8 +82,8 @@ function Login() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name='password' value={state.password} onChange={handleChange} />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
+                    <div class="g-recaptcha" data-sitekey="6LcwqEgjAAAAAMQVR8Z0vjwLJ2MHWXkRnN5atD-e" onClick={() => onClick()}></div>
+                    <Button variant="primary" id='submit' type="submit" >
                         Submit
                     </Button>
                 </Form>
