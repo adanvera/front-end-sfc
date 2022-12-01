@@ -6,23 +6,31 @@ import { Link } from 'react-router-dom';
 import DatosCliente from '../AdministracionDatosCliente/DatosCliente';
 
 function Navtop() {
+    const token = localStorage.getItem('mostrar')
     return (
-        <Navbar bg="light" expand="lg">
-            <Container fluid={true} >
-                <Navbar.Brand><Link to="/dashboard">Sistema de fidelización</Link></Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Link to="/clientes">Clientes</Link>
-                        <Link to="/bolsapuntos">Bolsa puntos</Link>
-                        <Link to="/reglas">Reglas</Link>
-                        <Link to="/canjes">Canjes</Link>
-                        <Link to="/compras">Compras</Link>
-                        <Link to="/premios">Premios</Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <>
+            {
+                token !== null ?
+                    <Navbar bg="light" expand="lg">
+                        <Container fluid={true} >
+                            <Navbar.Brand><Link to="/dashboard">Sistema de fidelización</Link></Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Link to="/clientes">Clientes</Link>
+                                    <Link to="/bolsapuntos">Bolsa puntos</Link>
+                                    <Link to="/reglas">Reglas</Link>
+                                    <Link to="/canjes">Canjes</Link>
+                                    <Link to="/compras">Compras</Link>
+                                    <Link to="/premios">Premios</Link>
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar> : ''
+            }
+
+        </>
+
     );
 }
 
